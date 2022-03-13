@@ -19,8 +19,8 @@ class Credit(models.Model):
     def new_buy(self, amount):
         self.value -= amount
         self.save()
-        new_purchase = Buy.objects.create(wallet=self, cost=amount)
-        return new_purchase.save()
+        new_buy = Buy.objects.create(wallet=self, cost=amount)
+        return new_buy.save()
 
     def __str__(self):
         return f'{self.account_owner}'
@@ -32,7 +32,7 @@ class Buy(models.Model):
     amount = models.IntegerField(validators=[MinValueValidator(0)])
 
     def __str__(self) -> str:
-        return f'{self.wallet.id}: {self.amount}'
+        return f'{self.wallet.account_owner}: {self.amount}'
 
 
 class Charge(models.Model):
@@ -41,4 +41,4 @@ class Charge(models.Model):
     amount = models.IntegerField(validators=[MinValueValidator(0)])
 
     def __str__(self) -> str:
-        return f'{self.wallet.id}: {self.amount}'
+        return f'{self.wallet.account_owner}: {self.amount}'
