@@ -39,6 +39,6 @@ class Charge(models.Model):
     wallet = models.ForeignKey(Credit, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True, null=True)
     amount = models.IntegerField(validators=[MinValueValidator(0)])
-
+    
     def __str__(self) -> str:
         return f'{self.wallet.account_owner}: {self.amount}'
